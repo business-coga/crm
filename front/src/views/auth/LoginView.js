@@ -85,7 +85,7 @@ render(){
         <Container maxWidth="sm">
           <TextField
             fullWidth
-            label="Tài khoản"
+            label="Email tài khoản"
             margin="normal"
             name="username"
             type="text"
