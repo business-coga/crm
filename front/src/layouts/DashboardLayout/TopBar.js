@@ -43,7 +43,7 @@ const TopBar = ({
           <Logo />
         </RouterLink>
         <Box flexGrow={1} />
-        <Hidden mdDown>
+        {/* <Hidden mdDown>
           <IconButton color="inherit">
             <Badge
               badgeContent={notifications.length}
@@ -56,7 +56,7 @@ const TopBar = ({
           <IconButton color="inherit">
             <InputIcon />
           </IconButton>
-        </Hidden>
+        </Hidden> */}
         <Hidden lgUp>
           <IconButton
             color="inherit"
