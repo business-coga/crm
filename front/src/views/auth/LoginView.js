@@ -69,7 +69,8 @@ render(){
       style={{
         height: '100%',
         paddingBottom: 3,
-        paddingTop: 3
+        paddingTop: 3,
+        backgroundImage: '/static/back.png'
       }}
     >
       {this.state.auth ? <Navigate to="/app/ticket" />  : ''}
