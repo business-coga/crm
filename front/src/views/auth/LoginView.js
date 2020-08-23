@@ -1,7 +1,5 @@
 import React from 'react';
-import { Link as RouterLink, useNavigate } from 'react-router-dom';
-import * as Yup from 'yup';
-import { Formik } from 'formik';
+import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Button,
@@ -9,29 +7,72 @@ import {
   Link,
   TextField,
   Typography,
-  makeStyles
 } from '@material-ui/core';
-
+import axios from 'axios'
 import Page from 'src/components/Page';
+import { Navigate } from 'react-router-dom';
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    backgroundColor: theme.palette.background.dark,
-    height: '100%',
-    paddingBottom: theme.spacing(3),
-    paddingTop: theme.spacing(3)
+
+class LoginView extends React.Component{ 
+  constructor(props){
+    super(props);
+    this.state = {
+      username : '',
+      password : '',
+      auth : window.localStorage.auth ? true : false
+    }
   }
-}));
 
-const LoginView = () => {
-  const classes = useStyles();
-  const navigate = useNavigate();
+handleUsernameChange(event){
+  this.setState({
+    username : event.target.value
+  })
+}
 
+handlePasswordChange(event){
+  this.setState({
+    password : event.target.value
+  })
+}
+
+
+login(){
+  // console.log(this.state)
+  axios({
+    method : 'POST',
+    url : `/api/v1/login`,
+    data : {
+      username : this.state.username,
+      password : this.state.password
+    }
+  })
+  .then(res => {
+    if(res.status === 200){
+      console.log(res.data)
+      window.localStorage.auth =  JSON.stringify(res.data)
+      this.setState({auth : true})
+    }else{
+      alert(res.data.message)
+    }
+  })
+  .catch(err =>{
+    this.setState({password : ''})
+    alert(err.response.data.message)
+    console.log(this.state)
+  })
+}
+
+render(){
   return (
     <Page
-      className={classes.root}
       title="Login"
+      style={{
+        height: '100%',
+        paddingBottom: 3,
+        paddingTop: 3
+      }}
     >
+      {this.state.auth ? <Navigate to="/app/ticket" />  : ''}
       <Box
         display="flex"
         flexDirection="column"
@@ -39,87 +80,57 @@ const LoginView = () => {
         justifyContent="center"
       >
         <Container maxWidth="sm">
-          <Formik
-            initialValues={{
-              email: 'demo@devias.io',
-              password: 'Password123'
-            }}
-            validationSchema={Yup.object().shape({
-              email: Yup.string().email('Must be a valid email').max(255).required('Email is required'),
-              password: Yup.string().max(255).required('Bạn chưa điền mật khẩu')
-            })}
-            onSubmit={() => {
-              navigate('/app/dashboard', { replace: true });
-            }}
+          <TextField
+            fullWidth
+            label="Tài khoản"
+            margin="normal"
+            name="username"
+            type="text"
+            variant="outlined"
+            value={this.state.username} 
+            onChange={this.handleUsernameChange.bind(this)}
+          />
+          <TextField
+            fullWidth
+            label="Mật khẩu"
+            margin="normal"
+            name="password"
+            type="password"
+            variant="outlined"
+            value={this.state.password} 
+            onChange={this.handlePasswordChange.bind(this)}
+          />
+          <Box my={2}>
+            <Button
+              color="primary"
+              fullWidth
+              size="large"
+              type="submit"
+              variant="contained"
+              onClick={this.login.bind(this)}
+            >
+              Đăng nhập
+            </Button>
+          </Box>
+          <Typography
+            color="textSecondary"
+            variant="body1"
           >
-            {({
-              errors,
-              handleBlur,
-              handleChange,
-              handleSubmit,
-              isSubmitting,
-              touched,
-              values
-            }) => (
-              <form onSubmit={handleSubmit}>
-                <TextField
-                  error={Boolean(touched.email && errors.email)}
-                  fullWidth
-                  helperText={touched.email && errors.email}
-                  label="Tài khoản"
-                  margin="normal"
-                  name="username"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  type="text"
-                  variant="outlined"
-                />
-                <TextField
-                  error={Boolean(touched.password && errors.password)}
-                  fullWidth
-                  helperText={touched.password && errors.password}
-                  label="Mật khẩu"
-                  margin="normal"
-                  name="password"
-                  onBlur={handleBlur}
-                  onChange={handleChange}
-                  type="password"
-                  // value={values.password}
-                  variant="outlined"
-                />
-                <Box my={2}>
-                  <Button
-                    color="primary"
-                    disabled={isSubmitting}
-                    fullWidth
-                    size="large"
-                    type="submit"
-                    variant="contained"
-                  >
-                    Đăng nhập
-                  </Button>
-                </Box>
-                <Typography
-                  color="textSecondary"
-                  variant="body1"
-                >
-                  Bạn chưa có tài khoản?
-                  {' '}
-                  <Link
-                    component={RouterLink}
-                    to="/register"
-                    variant="h6"
-                  >
-                    Tạo tài khoản
-                  </Link>
-                </Typography>
-              </form>
-            )}
-          </Formik>
+            Bạn chưa có tài khoản?
+            {' '}
+            <Link
+              component={RouterLink}
+              to="/register"
+              variant="h6"
+            >
+              Tạo tài khoản
+            </Link>
+          </Typography>
         </Container>
       </Box>
     </Page>
-  );
-};
+  )}
+}
 
-export default LoginView;
+
+export default LoginView

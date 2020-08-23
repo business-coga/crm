@@ -20,7 +20,7 @@ const Tickets = mongoose.model('ticket', new Schema({
     phone : {type : String, trim : true},
     description : {type : String, trim : true},
     value : {type : String, trim : true},
-    valid : {type : String, trim : true},
+    valid : {type : Boolean},
     activeDate : {type : Date},
 }))
 

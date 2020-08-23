@@ -35,7 +35,7 @@ const routes = [
       { path: 'login', element: <LoginView /> },
       { path: 'register', element: <RegisterView /> },
       { path: '404', element: <NotFoundView /> },
-      { path: '/', element: <Navigate to="/app/dashboard" /> },
+      { path: '/', element: window.localStorage.auth ? <Navigate to="/app/ticket" /> : <Navigate to="/login" />  }, //Chuyển hướng đầu trang
       { path: '*', element: <Navigate to="/404" /> }
     ]
   }

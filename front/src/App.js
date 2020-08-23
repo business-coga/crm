@@ -13,6 +13,7 @@ const App = () => {
   return (
     <ThemeProvider theme={theme}>
       <GlobalStyles />
+      
       {routing}
     </ThemeProvider>
   );

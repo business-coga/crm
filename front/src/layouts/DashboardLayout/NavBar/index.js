@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import {
+  Button,
   Box,
   Divider,
   Drawer,
@@ -20,6 +21,7 @@ import {
   // Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
+import { Navigate } from 'react-router-dom';
 
 // const user = {
 //   avatar: '/static/images/avatars/avatar_6.png',
@@ -31,13 +33,13 @@ const items = [
   {
     href: '/app/ticket',
     icon: ShoppingBagIcon,
-    title: 'Ticket'
+    title: 'Voucher'
   },
-  {
-    href: '/app/sms',
-    icon: ShoppingBagIcon,
-    title: 'SMS'
-  },
+  // {
+  //   href: '/app/sms',
+  //   icon: ShoppingBagIcon,
+  //   title: 'SMS'
+  // },
   // {
   //   href: '/app/dashboard',
   //   icon: BarChartIcon,
@@ -96,9 +98,38 @@ const useStyles = makeStyles(() => ({
   }
 }));
 
+
+class LogoutView extends React.Component{ 
+  constructor(props){
+    super(props)
+    this.state = {
+      auth : window.localStorage.auth ? true : false
+    }
+  }
+
+  logout(){
+    window.localStorage.removeItem('auth')
+    this.setState({auth : undefined})
+  }
+
+  render(){
+    return (
+      <Button
+        onClick={this.logout.bind(this)}
+      >
+        {this.state.auth ? '' : <Navigate to="/login" />}
+        Đăng xuất
+      </Button> 
+    )
+  }
+}
+
 const NavBar = ({ onMobileClose, openMobile }) => {
   const classes = useStyles();
   const location = useLocation();
+
+
+
 
   useEffect(() => {
     if (openMobile && onMobileClose) {
@@ -113,6 +144,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       display="flex"
       flexDirection="column"
     >
+
       {/* <Box
         alignItems="center"
         display="flex"
@@ -151,9 +183,18 @@ const NavBar = ({ onMobileClose, openMobile }) => {
             />
           ))}
         </List>
+        
+        <NavItem href="/" key="feedback" title="Feedback" icon={ShoppingBagIcon} onClick={function openTab(){
+                console.log('abc')
+                window.open("http://beauty.lehoang.net","_blank",);
+              }}>
+        </NavItem>
+        
+        
       </Box>
+      <div></div>
       <Box flexGrow={1} />
-      
+        <LogoutView></LogoutView>
     </Box>
   );
 

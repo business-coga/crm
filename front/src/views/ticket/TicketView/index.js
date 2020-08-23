@@ -28,6 +28,31 @@ class SettingsView extends React.Component{
 
   active(){
     console.log('active')
+    axios({
+      method : 'PUT',
+      url : `/api/v1/tickets/${this.state.ticket._id}`,
+      data : { valid : true, activeDate : new Date()}
+    })
+    .then(res => {
+      if(res.status === 200){
+        alert('Kích hoạt ticket thành công')
+      }else{
+        alert('Chưa kích hoạt được ticket !!!')
+      }
+      axios({
+        method : 'GET',
+        url: `/api/v1/tickets?code=${this.state.code}`,
+      })
+      .then(res => {
+        if(res.status !== 200)
+          return
+        if(res.data[0]){
+          this.setState({ticket : res.data[0]})
+        }else{
+          this.setState({ticket : {}})
+        }
+      })
+    })
   }
 
   checkTicket(){
@@ -54,14 +79,14 @@ class SettingsView extends React.Component{
   
     return (
       <Page
-        title="Ticket"
+        title="Voucher"
       >
         <Container maxWidth="lg">
           <div>
             <Card>
               <CardHeader 
               // subheader="Manage the notifications"
-              title="Kiểm tra mã Ticket"
+              title="Kiểm tra mã Voucher"
               >
               </CardHeader>
               <Divider />
@@ -108,28 +133,41 @@ class SettingsView extends React.Component{
                 {this.state.ticket.code ? 
                                 <Grid container>
                                 <Grid item md={12} sm={12} xs={12}>                                   
+                                  {this.state.ticket.valid ? 
+                                  <div style={{color : '#2980B9',fontSize: 'xxx-large'}}><b>Đã sử dụng</b></div> :
+                                  <div style={{color : '#F1C40F',fontSize: 'xxx-large'}}><b>Chưa sử dụng</b></div>
+                                  }
+                                </Grid>
+                                <br /><br />
+                                <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>                                   
                                   <label style={{color : '#2874A6'}}><b>Mã</b></label> : {this.state.ticket.code}
                                 </Grid>
-                                <Grid item md={12} sm={12} xs={12}>
-                                <label style={{color : '#2874A6'}}><b>Tên khách hàng</b></label> : {this.state.ticket.customerName}
+                                <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
+                                  <label style={{color : '#2874A6'}}><b>Tên khách hàng</b></label> : {this.state.ticket.customerName}
                                 </Grid>
-                                <Grid item md={12} sm={12} xs={12}>
-                                <label style={{color : '#2874A6'}}><b>Diễn giải</b></label> : {this.state.ticket.description}
+                                <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
+                                  <label style={{color : '#2874A6'}}><b>Nội dung</b></label> : {this.state.ticket.description}
                                 </Grid>
-                                <Grid item md={12} sm={12} xs={12}>
-                                <label style={{color : '#2874A6'}}><b>Số điện thoại</b></label> : {this.state.ticket.phone}
+                                <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
+                                  <label style={{color : '#2874A6'}}><b>Số điện thoại</b></label> : {this.state.ticket.phone}
                                 </Grid>
-                                <Grid item md={12} sm={12} xs={12}>
-                                <label style={{color : '#2874A6'}}><b>Giá trị</b></label> : {this.state.ticket.value}
-                                </Grid>
-                                <Grid item md={12} sm={12} xs={12}>
-                                <label style={{color : '#2874A6'}}><b>Chứng thực</b></label> : {this.state.ticket.valid}
-                                </Grid>
-                                <Grid item md={12} sm={12} xs={12}>
-                                <label style={{color : '#2874A6'}}><b>Ngày kích hoạt</b></label> : {this.state.ticket.activeDate}
-                                </Grid>
+                                {/* <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
+                                  <label style={{color : '#2874A6'}}><b>Giá trị</b></label> : {this.state.ticket.value}
+                                </Grid> */}
+                                {/* <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
+                                  <label style={{color : '#2874A6'}}><b>Trạng thái</b></label> : 
+                                  {this.state.ticket.valid ? 
+                                   'Đã sử dụng' :
+                                   'Chưa sử dụng'
+                                  }
+                                </Grid> */}
+                                {this.state.ticket.valid ? 
+                                  <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
+                                  <label style={{color : '#2874A6'}}><b>Ngày kích hoạt</b></label> : {(new Date(this.state.ticket.activeDate).toLocaleDateString())}
+                                  </Grid> : ''
+                                }
                                 <br /><br /><br />
-                                {this.state.ticket.activeDate ? 
+                                {this.state.ticket.valid ? 
                                 '':
                                 <Button
                                 color="primary"
