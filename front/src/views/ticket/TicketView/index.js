@@ -140,16 +140,16 @@ class SettingsView extends React.Component{
                                 </Grid>
                                 <br /><br />
                                 <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>                                   
-                                  <label style={{color : '#2874A6'}}><b>Mã</b></label> : {this.state.ticket.code}
+                                  <label style={{color : '#2874A6'}}><b>Mã</b></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {this.state.ticket.code}
                                 </Grid>
                                 <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
-                                  <label style={{color : '#2874A6'}}><b>Tên khách hàng</b></label> : {this.state.ticket.customerName}
+                                  <label style={{color : '#2874A6'}}><b>Tên KH</b></label>&nbsp;&nbsp;&nbsp; : {this.state.ticket.customerName}
                                 </Grid>
                                 <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
-                                  <label style={{color : '#2874A6'}}><b>Nội dung</b></label> : {this.state.ticket.description}
+                                  <label style={{color : '#2874A6'}}><b>Nội dung</b></label> &nbsp;: {this.state.ticket.description}
                                 </Grid>
                                 <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
-                                  <label style={{color : '#2874A6'}}><b>Số điện thoại</b></label> : {this.state.ticket.phone}
+                                  <label style={{color : '#2874A6'}}><b>SĐT</b></label> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;: {this.state.ticket.phone}
                                 </Grid>
                                 {/* <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
                                   <label style={{color : '#2874A6'}}><b>Giá trị</b></label> : {this.state.ticket.value}
@@ -163,7 +163,7 @@ class SettingsView extends React.Component{
                                 </Grid> */}
                                 {this.state.ticket.valid ? 
                                   <Grid item md={12} sm={12} xs={12} style={{fontSize: 'x-large'}}>
-                                  <label style={{color : '#2874A6'}}><b>Ngày kích hoạt</b></label> : {(new Date(this.state.ticket.activeDate).toLocaleDateString())}
+                                  <label style={{color : '#2874A6'}}><b>Kích hoạt</b></label> : {(new Date(this.state.ticket.activeDate).toLocaleDateString())}
                                   </Grid> : ''
                                 }
                                 <br /><br /><br />
