@@ -25,13 +25,13 @@ class LoginView extends React.Component{
 
 handleUsernameChange(event){
   this.setState({
-    username : event.target.value
+    username : event.target.value.toLowerCase()
   })
 }
 
 handlePasswordChange(event){
   this.setState({
-    password : event.target.value
+    password : event.target.value.toLowerCase()
   })
 }
 
