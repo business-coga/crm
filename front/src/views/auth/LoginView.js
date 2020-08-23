@@ -1,12 +1,12 @@
 import React from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+// import { Link as RouterLink } from 'react-router-dom';
 import {
   Box,
   Button,
   Container,
-  Link,
+  // Link,
   TextField,
-  Typography,
+  // Typography,
 } from '@material-ui/core';
 import axios from 'axios'
 import Page from 'src/components/Page';
@@ -37,7 +37,7 @@ handlePasswordChange(event){
 
 
 login(){
-  // console.log(this.state)
+
   axios({
     method : 'POST',
     url : `/api/v1/login`,
@@ -57,7 +57,9 @@ login(){
   })
   .catch(err =>{
     this.setState({password : ''})
-    alert(err.response.data.message)
+    // alert(err.response.data.message)
+    // alert(err)
+    alert('Tài khoản chưa chính xác')
     console.log(this.state)
   })
 }
@@ -113,7 +115,7 @@ render(){
               Đăng nhập
             </Button>
           </Box>
-          <Typography
+          {/* <Typography
             color="textSecondary"
             variant="body1"
           >
@@ -126,7 +128,7 @@ render(){
             >
               Tạo tài khoản
             </Link>
-          </Typography>
+          </Typography> */}
         </Container>
       </Box>
     </Page>
