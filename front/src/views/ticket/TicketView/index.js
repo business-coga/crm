@@ -134,8 +134,8 @@ class SettingsView extends React.Component{
                                 <Grid container>
                                 <Grid item md={12} sm={12} xs={12}>                                   
                                   {this.state.ticket.valid ? 
-                                  <div style={{color : '#2980B9',fontSize: 'xxx-large'}}><b>Đã sử dụng</b></div> :
-                                  <div style={{color : '#E74C3C',fontSize: 'xxx-large'}}><b>Chưa sử dụng</b></div>
+                                  <div style={{color : '#E74C3C',fontSize: 'xxx-large'}}><b>Đã sử dụng</b></div> :
+                                  <div style={{color : '#2980B9',fontSize: 'xxx-large'}}><b>Chưa sử dụng</b></div>
                                   }
                                 </Grid>
                                 <br /><br />
