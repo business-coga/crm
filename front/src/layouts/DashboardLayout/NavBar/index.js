@@ -186,7 +186,7 @@ const NavBar = ({ onMobileClose, openMobile }) => {
         
         <NavItem href="/" key="feedback" title="Feedback" icon={ShoppingBagIcon} onClick={function openTab(){
                 console.log('abc')
-                window.open("http://beauty.lehoang.net","_blank",);
+                window.open("http://beauty.deeplink.vn/vi/quachthuyspa","_blank",);
               }}>
         </NavItem>
         
