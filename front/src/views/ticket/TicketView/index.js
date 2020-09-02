@@ -10,8 +10,6 @@ import {
   TextField,
   Table,
   TableCell,
-  TableContainer,
-  TableHead,
   TableBody,
   TableRow
 } from '@material-ui/core';
@@ -98,14 +96,6 @@ class SettingsView extends React.Component {
   }
 
   render() {
-
-    if (!this.state.ticket.valid) {
-      this.state.dateActivated = [<TableCell><strong>Thời điểm kích hoạt:</strong></TableCell>,
-      <TableCell>{(this.formatDate(new Date(this.state.ticket.activeDate)))}</TableCell>];
-    } else {
-      this.state.dateActivated = '';
-    }
-
     return (
       <Page
         title="Voucher"
@@ -186,8 +176,8 @@ class SettingsView extends React.Component {
                           <TableCell><strong>Số điện thoại:</strong></TableCell>
                           <TableCell>{this.state.ticket.phone}</TableCell>
                         </TableRow>
-                        {this.state.dateActivated}
-
+                        {!this.state.ticket.valid ? [<TableCell><strong>Thời điểm kích hoạt:</strong></TableCell>,
+                          <TableCell>{(this.formatDate(new Date(this.state.ticket.activeDate)))}</TableCell>] : ''}
                         {this.state.ticket.valid ?
                           <TableRow><TableCell>
                             <Button

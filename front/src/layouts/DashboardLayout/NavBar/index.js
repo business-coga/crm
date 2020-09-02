@@ -7,18 +7,11 @@ import {
   Divider,
   Drawer,
   Hidden,
-  List,
   makeStyles
 } from '@material-ui/core';
 import {
-  // AlertCircle as AlertCircleIcon,
-  // BarChart as BarChartIcon,
-  // Lock as LockIcon,
-  // Settings as SettingsIcon,
+
   ShoppingBag as ShoppingBagIcon,
-  // User as UserIcon,
-  // UserPlus as UserPlusIcon,
-  // Users as UsersIcon
 } from 'react-feather';
 import NavItem from './NavItem';
 import { Navigate } from 'react-router-dom';
@@ -29,58 +22,6 @@ import { Navigate } from 'react-router-dom';
 //   name: 'Katarina Smith'
 // };
 
-const items = [
-  {
-    href: '/app/ticket',
-    icon: ShoppingBagIcon,
-    title: 'Voucher'
-  },
-  // {
-  //   href: '/app/sms',
-  //   icon: ShoppingBagIcon,
-  //   title: 'SMS'
-  // },
-  // {
-  //   href: '/app/dashboard',
-  //   icon: BarChartIcon,
-  //   title: 'Dashboard'
-  // },
-  // {
-  //   href: '/app/customers',
-  //   icon: UsersIcon,
-  //   title: 'Customers'
-  // },
-  // {
-  //   href: '/app/products',
-  //   icon: ShoppingBagIcon,
-  //   title: 'Products'
-  // },
-  // {
-  //   href: '/app/account',
-  //   icon: UserIcon,
-  //   title: 'Account'
-  // },
-  // {
-  //   href: '/app/settings',
-  //   icon: SettingsIcon,
-  //   title: 'Settings'
-  // },
-  // {
-  //   href: '/login',
-  //   icon: LockIcon,
-  //   title: 'Login'
-  // },
-  // {
-  //   href: '/register',
-  //   icon: UserPlusIcon,
-  //   title: 'Register'
-  // },
-  // {
-  //   href: '/404',
-  //   icon: AlertCircleIcon,
-  //   title: 'Error'
-  // }
-];
 
 const useStyles = makeStyles(() => ({
   mobileDrawer: {
@@ -173,24 +114,12 @@ const NavBar = ({ onMobileClose, openMobile }) => {
       </Box> */}
       <Divider />
       <Box p={2}>
-        <List>
-          {items.map((item) => (
-            <NavItem
-              href={item.href}
-              key={item.title}
-              title={item.title}
-              icon={item.icon}
-            />
-          ))}
-        </List>
-        
+        <NavItem href="/app/ticket" key="ticket" title="Voucher" icon={ShoppingBagIcon} />        
         <NavItem href="/" key="feedback" title="Feedback" icon={ShoppingBagIcon} onClick={function openTab(){
                 console.log('abc')
                 window.open("http://beauty.deeplink.vn/vi/quachthuyspa","_blank",);
-              }}>
-        </NavItem>
-        
-        
+              }} />
+        <NavItem href="/app/reports-voucher" key="reports-voucher" title="Báo cáo voucher" icon={ShoppingBagIcon} />        
       </Box>
       <div></div>
       <Box flexGrow={1} />

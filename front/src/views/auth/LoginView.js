@@ -82,7 +82,7 @@ render(){
         justifyContent="center"
       >
         <Container maxWidth="sm" style={{ background:"white", textAlign: 'center' }} >
-          <img src="/static/logo.png" height="100px" style={{ marginTop: '20px' }}/>
+          <img src="/static/logo.png" alt="logo" height="100px" style={{ marginTop: '20px' }}/>
           <TextField
             fullWidth
             label="Email đăng nhập"

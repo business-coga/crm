@@ -12,6 +12,7 @@ import RegisterView from 'src/views/auth/RegisterView';
 import SettingsView from 'src/views/settings/SettingsView';
 import TicketView from 'src/views/ticket/TicketView'
 import SMSView from 'src/views/sms/SMSView'
+import ReportsVoucherView from 'src/views/reportsVoucher/ReportsVoucherView'
 
 const routes = [
   {
@@ -25,6 +26,7 @@ const routes = [
       { path: 'settings', element: <SettingsView /> },
       { path: 'ticket', element: <TicketView /> },
       { path: 'sms', element: <SMSView /> },
+      { path : 'reports-voucher' , element : <ReportsVoucherView />},
       { path: '*', element: <Navigate to="/404" /> }
     ]
   },
